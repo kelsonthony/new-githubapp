@@ -6,10 +6,12 @@ new-githubapp
 npx webapack
 
 
-## Design App
+## Marcação Design App
 
 GitHub API 
 
 Link: https://api.github.com/users/kelsonthony
 
 ## Separar os componentes e marca propTypes
+
+## Criar o estado da aplicação
