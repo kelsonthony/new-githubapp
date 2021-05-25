@@ -24,19 +24,23 @@ module.exports = {
 
     module: {
         rules: [
-        {
-            enforce: 'pre',
-            test: /\.jsx?$/,
-            exclude: /(node_modules|bower_components)/,
-            include: /src/,
-            loader: 'standard-loader'
-        },
-        {
-            test: /\.(js)$/,
-            exclude: /node_modules/,
-            include: /src/,
-            use: ['babel-loader']
-        }
+            {
+                enforce: 'pre',
+                test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/,
+                include: /src/,
+                loader: 'standard-loader'
+            },
+            {
+                test: /\.(js)$/,
+                exclude: /node_modules/,
+                include: /src/,
+                use: ['babel-loader']
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+            }
         ]
     },
 

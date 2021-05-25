@@ -11,3 +11,5 @@ npx webapack
 GitHub API 
 
 Link: https://api.github.com/users/kelsonthony
+
+## Separar os componentes e marca propTypes
