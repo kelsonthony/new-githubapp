@@ -8,11 +8,11 @@ import Repos from './repos'
 
 import '../css/style.css'
 
-const AppContent = ({ userinfo, repos, starred }) => (
+const AppContent = ({ userinfo, repos, starred, handleSearch, clickRepos, clickStarred }) => (
   <div className='app'>
-    <Search />
+    <Search handleSearch={handleSearch} />
     {!!userinfo && <UserInfo userinfo={userinfo} />}
-    {!!userinfo && <Actions />}
+    {!!userinfo && <Actions clickRepos={clickRepos} clickStarred={clickStarred}  />}
     {!!repos.length &&
       <Repos
         className='repos'
