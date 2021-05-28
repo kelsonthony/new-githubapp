@@ -25,11 +25,17 @@ class App extends Component {
     const value = e.target.value
     const keyCode = e.which || e.keyCode
     const ENTER = 13
+    const target= e.target
+    //console.log('evento do Hnadle Search', e.target)
+    //console.dir(e.target)
+    //e.persist()
 
     if (keyCode === ENTER) {
+      target.disabled = true
+      console.log('evento keycode = enter', e)
       ajax().get(this.getGitHubApiUrl(value))
       .then((result) => {
-        console.log('result', result)
+        //console.log('result', result)
         this.setState({
           userinfo: {
             username: result.name,
@@ -45,13 +51,17 @@ class App extends Component {
         })
         
       })
+      .always(() => {
+        target.disabled = false
+        console.log('evento Always', e)
+      })
     }
-    console.log('keyCode', keyCode)
+    //console.dir(e.target)
   }
 
   clickRepos (type) {
     return (e) => {
-      console.log('type', type)
+      //console.log('type', type)
       const username = this.state.userinfo.login
       ajax().get(this.getGitHubApiUrl(username, type))
         .then((result) => {
