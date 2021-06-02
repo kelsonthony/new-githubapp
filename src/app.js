@@ -10,8 +10,11 @@ class App extends Component {
     this.state = {
       userinfo: null,
       repos: [],
-      starred: []
+      starred: [],
+      isFetching: false
     }
+
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   getGitHubApiUrl (username, type) {
@@ -25,17 +28,15 @@ class App extends Component {
     const value = e.target.value
     const keyCode = e.which || e.keyCode
     const ENTER = 13
-    const target= e.target
-    //console.log('evento do Hnadle Search', e.target)
-    //console.dir(e.target)
-    //e.persist()
+    //const target= e.target
 
     if (keyCode === ENTER) {
-      target.disabled = true
-      console.log('evento keycode = enter', e)
+      //target.disabled = true
+
+      this.setState({ isFetching: true })
+      
       ajax().get(this.getGitHubApiUrl(value))
       .then((result) => {
-        //console.log('result', result)
         this.setState({
           userinfo: {
             username: result.name,
@@ -47,16 +48,10 @@ class App extends Component {
           },
           repos: [],
           starred: []
-
         })
-        
       })
-      .always(() => {
-        target.disabled = false
-        console.log('evento Always', e)
-      })
+      .always(() => this.setState({ isFetching: false }))
     }
-    //console.dir(e.target)
   }
 
   clickRepos (type) {
@@ -80,14 +75,11 @@ class App extends Component {
 
   render() {
     return (
-      <AppContent 
-        userinfo={this.state.userinfo}
-        repos={this.state.repos}
-        starred={this.state.starred}
-        handleSearch={(e) => this.handleSearch(e)}
+      <AppContent
+        {...this.state}
+        handleSearch={this.handleSearch}
         clickRepos={this.clickRepos('repos')}
         clickStarred={this.clickRepos('starred')}
-        
         
         
       />

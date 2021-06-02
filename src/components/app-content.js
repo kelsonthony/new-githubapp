@@ -8,9 +8,17 @@ import Repos from './repos'
 
 import '../css/style.css'
 
-const AppContent = ({ userinfo, repos, starred, handleSearch, clickRepos, clickStarred }) => (
+const AppContent = ({ 
+  userinfo, 
+  repos, 
+  starred, 
+  isFetching,
+  handleSearch, 
+  clickRepos, 
+  clickStarred }) => (
   <div className='app'>
-    <Search handleSearch={handleSearch} />
+    <Search handleSearch={handleSearch} isDisabled={isFetching} />
+    {isFetching && <div><p>Carregando...</p></div>}
     {!!userinfo && <UserInfo userinfo={userinfo} />}
     {!!userinfo && <Actions clickRepos={clickRepos} clickStarred={clickStarred}  />}
     {!!repos.length &&
@@ -22,10 +30,10 @@ const AppContent = ({ userinfo, repos, starred, handleSearch, clickRepos, clickS
     }
     {!!starred.length &&
       <Repos
-      className='starred'
-      title='Favoritos:'
-      repos={starred}
-    />
+        className='starred'
+        title='Favoritos:'
+        repos={starred}
+      />
     }
   </div>
 )
@@ -33,7 +41,11 @@ const AppContent = ({ userinfo, repos, starred, handleSearch, clickRepos, clickS
 AppContent.propTypes = {
   userinfo: PropTypes.object,
   repos: PropTypes.array.isRequired, 
-  starred: PropTypes.array.isRequired
+  starred: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  clickRepos: PropTypes.func.isRequired,
+  clickStarred: PropTypes.func.isRequired
 }
 
 export default AppContent

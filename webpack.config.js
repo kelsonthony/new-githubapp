@@ -19,7 +19,7 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'dist'),
         index: 'index.html',
         port: 4000,
-        host: '192.168.1.44'
+        host: '192.168.1.6'
     },
 
     module: {
